@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import todo_icon from "../assets/todo_icon.png";
 import TodoItems from "./TodoItems";
 
+// Add functionality
+
 const Todo = () => {
   const inputRef = useRef();
 
@@ -23,6 +25,14 @@ const Todo = () => {
     // console.log(inputText);
     inputRef.current.value = "";
   };
+
+  // Delete functionality
+  const deleteTodo = (id) => {
+    setTodoList((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== id);
+    });
+  };
+
   return (
     <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 min-h-[550px] rounded-xl">
       {/* ------title---------- */}
@@ -58,6 +68,7 @@ const Todo = () => {
               text={item.text}
               id={item.id}
               isComplete={item.isComplete}
+              deleteTodo={deleteTodo}
             />
           );
         })}
